@@ -4,7 +4,13 @@
 LinkedList::LinkedList(): head{nullptr}, tail{nullptr}{}
 
 LinkedList::~LinkedList() {
-
+    Node *temp = head;
+    while (head != nullptr) {
+        head = head->next;
+        delete temp;
+        temp = head;
+    }
+    tail = nullptr;
 }
 
 void LinkedList::insertAtHead(const int value) {
@@ -19,8 +25,6 @@ void LinkedList::insertAtHead(const int value) {
         head = new Node;
         head->next = temp;
         head->data = value;
-        temp = nullptr;
-        delete temp;
     }
 }
 void LinkedList::insertAtTail(const int value) {
@@ -51,6 +55,5 @@ void LinkedList::print() const {
             currNode = currNode->next;
         }
         std::cout << '\n';
-        delete currNode;
     }
 }
